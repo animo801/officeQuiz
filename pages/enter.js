@@ -1,4 +1,4 @@
-import {auth, googleAuthProvider} from '../lib/firebase';
+// import {auth, googleAuthProvider} from '../lib/firebase';
 
 export default function EnterPage(props) {
   const email = null; 
