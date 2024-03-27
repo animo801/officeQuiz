@@ -54,6 +54,7 @@ export default function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0); 
   const [userResponses, setUserResponses] = useState([]);
   const [endOfQuiz, setEndOfQuiz] = useState(true);
+  const [answers, setAnswers] = useState(false);
   const [numberCorrect, setNumberCorrect] = useState(0);
 
   const handleAnswer = (answer) => {
@@ -73,6 +74,7 @@ export default function Home() {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setEndOfQuiz(false);
+      setAnswers(true);
     }
   }
 
@@ -102,8 +104,11 @@ export default function Home() {
           </div>
         }
         
-        <h1>Here are your answers</h1>
-        <h1>{numberCorrect}/3</h1>
+        {answers && <> 
+          <h1>Here are your answers</h1>
+          <h1>{numberCorrect}/{questions.length}</h1>
+        </>}
+       
 
 
       </div>
