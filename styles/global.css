@@ -15,4 +15,24 @@ a {
   box-sizing: border-box;
 }
 
+.button {
+  width: 100%;
+  padding: 20px 24px; 
+  font-weight: 700; 
+  font-family: "Montserrat", Helvetica, sans-serif; 
+  font-size: 16px; 
+  margin-bottom: 16px;
+  background-color: #fff;
+  color: #111;
+  border: none; 
+  border-radius: 100px;
+  border: 2px solid #F7F0E9;
+}
+
+.button:hover {
+  background-color: #444; 
+  color: #fff;
+  cursor: pointer;
+}
+
 

@@ -1,7 +1,9 @@
 .container {
   background-color: #FDF8F6;
   padding: 32px; 
-  min-height: 100vh
+  min-height: 100vh; 
+  display: flex;
+  align-items: center;
 }
 
 .question_div {
@@ -81,4 +83,22 @@
     background-color: #FDF8F6;
   }
   
+  .score_header {
+    margin: 0 0 12px 0; 
+    font-size: 20px; 
+    opacity: .8;
+    font-weight: 700;
+  }
+
+  .score_text {
+    font-size: 80px; 
+    font-weight: 800;
+    line-height: 80px;  
+    margin: 0; 
+  } 
   
+  .response_text {
+    font-size: 24px; 
+    font-weight: 700;
+    line-height: 32px
+  }
