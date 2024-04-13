@@ -17,3 +17,9 @@
   margin: 0 auto;
   padding-top: 80px
 }
+
+.sex {
+  height: 100px; 
+  width: 100px; 
+  background-color: blue;
+}

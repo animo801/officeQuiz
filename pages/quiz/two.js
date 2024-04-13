@@ -92,9 +92,10 @@ const imageStyle = {
 export default function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0); 
   const [userResponses, setUserResponses] = useState([]);
-  const [endOfQuiz, setEndOfQuiz] = useState(true);
+  const [quiz, setQuiz] = useState(false);
   const [answers, setAnswers] = useState(false);
   const [numberCorrect, setNumberCorrect] = useState(0);
+  const [intro, setIntro] = useState(true);
 
   const handleAnswer = (answer) => {
 
@@ -107,7 +108,7 @@ export default function Home() {
     if (currentQuestion < questions.length-1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      setEndOfQuiz(false);
+      setQuiz(false);
       setAnswers(true);
     }
   }
@@ -115,8 +116,13 @@ export default function Home() {
   const tryAgain = () => {
     setCurrentQuestion(0); 
     setNumberCorrect(0); 
-    setEndOfQuiz(true);
+    setQuiz(true);
     setAnswers(false);
+  }
+
+  const showQuiz = () => {
+    setQuiz(true); 
+    setIntro(false);
   }
   return (
     <div className={styles.container}>
@@ -131,8 +137,16 @@ export default function Home() {
 
       <div className={styles.mainContainer}>
         
+        {intro &&
+          <div>
+            <p>Level 2</p>
+            <h1>Season 1</h1>
+            <p>Think of this as the calm before the storm. Just characters. Most of them you probably know.</p>
+            <button onClick={()=> showQuiz()}className="button">Start Level 2</button>
+          </div>
+        }
         
-        {endOfQuiz && 
+        {quiz && 
           <div>
             <div className={styles.header_div}>
               <div className={styles.question_div}>
@@ -148,10 +162,10 @@ export default function Home() {
             <div>
               {questions[currentQuestion].image ? 
               
-              <Image style={imageStyle} src={questions[currentQuestion].image} width={500} height={500} alt='noneYa' priority={true}/>
+                <Image style={imageStyle} src={questions[currentQuestion].image} width={500} height={500} alt='noneYa' priority={true}/>
               : 
-              
-              <></>}
+                <></>
+              }
               
             </div>
             <div className={styles.questionList}>

@@ -3,6 +3,8 @@ import Head from 'next/head';
 import styles from '../../styles/quiz/One.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import Airtable from 'airtable';
+import axios from 'axios';
 
 const responses = [
   {
@@ -88,7 +90,6 @@ const imageStyle = {
   borderRadius: '16px'
 }
 
-
 export default function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0); 
   const [userResponses, setUserResponses] = useState([]);
@@ -96,6 +97,7 @@ export default function Home() {
   const [answers, setAnswers] = useState(false);
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [intro, setIntro] = useState(true);
+  const [theEmail, setTheEmail] = useState("animo801@gmail.com");
 
   const handleAnswer = (answer) => {
 
@@ -124,6 +126,28 @@ export default function Home() {
     setQuiz(true); 
     setIntro(false);
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); 
+
+    const response = await fetch('/api/addToNotion', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify({email: theEmail}),
+    }); 
+    const data = await response.json();
+    console.log('Data submitted to Notion', data)
+  }
+
+  const changesBaby = (event) => {
+    setTheEmail(event.target.value);
+  }
+
+
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -140,9 +164,19 @@ export default function Home() {
         {intro &&
           <div>
             <p>Level 1</p>
-            <h1>Easy Characters</h1>
-            <p>Think of this as the calm before the storm. Just characters. Most of them you probably know.</p>
+            <h1>Season One Episode One</h1>
+            <p>The Pilot. The first episode. Most of us can agree the first season of The Office was... not the best. But how well do you know it? 10 questions coming your way.</p>
             <button onClick={()=> showQuiz()}className="button">Start Level 1</button>
+
+              {/* Airtable form */}
+              <form onSubmit={handleSubmit}>
+                <label>
+                  Email:
+                  <input value={theEmail} type="email" onChange={changesBaby}/>
+                </label>
+                <button type="submit">Submit</button>
+              </form>
+
           </div>
         }
         
@@ -184,11 +218,14 @@ export default function Home() {
               <h1 className={styles.score_text}>{numberCorrect}/{questions.length}</h1>
               <p className={styles.response_text}>Ok... you might know something.</p>
               <p className={styles.response_text}>Since you got over 80% right you can go to the next level. But a warning... that was just a test. Its gonna get much harder.</p>
-              
-              <button className={styles.questionButtons} >
-                <Link href="/quiz/two">Go to Level 2</Link>
-              </button>
 
+              <Link href="/quiz/two">
+                <button className={styles.questionButtons} >
+                Go to Level 2
+                </button>
+              </Link>
+
+              
             </>
             
           )
