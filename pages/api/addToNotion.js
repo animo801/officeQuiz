@@ -2,7 +2,7 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { email } = req.body;  // Correctly extract the email from the request body
 
-        const notionSecret = "secret_wFtEdlM6GZ4XQX1H6wjhiIBHdxFRT0n6pdMAPACceGk";
+        const notionSecret = "";
         const databaseId = "e27216369e9c4317a2be5c9f1eedbcac";
 
         const { Client } = require('@notionhq/client');
